@@ -1,0 +1,14 @@
+[
+  {
+    "namespace": "themeLoader",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Load the complete Even Better BetterBird visual theme.",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

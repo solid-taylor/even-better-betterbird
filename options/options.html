@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Even Better BetterBird Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Even Better BetterBird</p>
+      <h1>Wallpaper settings</h1>
+      <p>Rotate the existing Nature Glass background without changing its Forest tint, blur, or interface glass.</p>
+    </header>
+
+    <section aria-labelledby="folder-heading">
+      <h2 id="folder-heading">Wallpaper folder</h2>
+      <div class="folder-row">
+        <input id="folder" type="text" readonly aria-label="Selected wallpaper folder">
+        <button id="browse" type="button">Choose folder…</button>
+      </div>
+      <p id="path-kind" class="hint"></p>
+    </section>
+
+    <section aria-labelledby="timing-heading">
+      <h2 id="timing-heading">Rotation</h2>
+      <label class="period-row" for="period">
+        Change wallpaper every
+        <input id="period" type="number" min="1" max="1440" step="1" value="15">
+        minutes
+      </label>
+      <p class="hint">Default: 15 minutes. The first image is always <strong>background.jpg</strong> when it exists.</p>
+    </section>
+
+    <section class="status-card" aria-live="polite">
+      <div><span>Current wallpaper</span><strong id="current-file">—</strong></div>
+      <div><span>Available images</span><strong id="image-count">—</strong></div>
+      <p id="status"></p>
+    </section>
+
+    <footer>
+      <button id="next" type="button" class="secondary">Show next now</button>
+      <button id="reset" type="button" class="secondary">Use included default</button>
+      <button id="save" type="button" class="primary">Save settings</button>
+    </footer>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

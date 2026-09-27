@@ -1,0 +1,266 @@
+/* Approved D: one extra tint per working pane, never per nested child. */
+@-moz-document url("chrome://messenger/content/messenger.xhtml") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4):not(#nature-glass-pane-guard) :is(#today-pane-panel, #unifiedToolbarContainer, #toolbar-menubar, #tabs-toolbar, #status-bar) {
+    background-color: rgba(12,22,19,.18) !important;
+  }
+}
+@-moz-document url("about:3pane") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4):not(#nature-glass-pane-guard) :is(#folderPane, #threadPane, #messagePane) {
+    background-color: rgba(12,22,19,.18) !important;
+  }
+}
+
+/* Nature Glass: approved Forest glass, 2px wallpaper blur, and frosted group headers.
+ * Scope: main mail window, 3-pane, reader chrome and multi-message view.
+ * Balanced clarity: 72% Forest tint, 75% saturation, 18% working-pane cover.
+ * Isolated negative-z wallpaper layer keeps text and icons sharp.
+ * Specificity guards beat the existing compatibility tail without reordering it.
+ * Native flagged/Important-tag states replace the temporary preview decorator.
+ * Rendered message content keeps its native dark/light behavior.
+ * Approved 2026-09-10.
+ */
+
+@-moz-document url("chrome://messenger/content/messenger.xhtml") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  isolation:isolate !important;
+  background:rgb(19, 29, 26) !important;
+  background-blend-mode:normal !important;
+  
+}
+ :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4)::before {
+  content:"" !important;
+  position:fixed !important;
+  inset:-54px !important;
+  z-index:-1 !important;
+  pointer-events:none !important;
+  background:linear-gradient(rgba(19, 29, 26,0.72),rgba(19, 29, 26,0.72)),url("background.jpg") center/cover no-repeat !important;
+  filter:blur(2px) saturate(.75) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  --ng-unread:rgba(128, 161, 130,.16);
+  --ng-edge:#a0bda1;
+  --ng-gold:rgba(205,155,47,.16);
+  --bb-bg-panel:transparent !important;
+  --bb-bg-hover:rgba(210,231,226,.09) !important;
+  --bb-bg-selected:rgba(105,163,183,.23) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(#messengerBody,#mailContent,#tabmail-container,#tabpanelcontainer,#tabmail,#navigation-toolbox,#titlebar,#toolbar-menubar,#unifiedToolbarContainer,#unifiedToolbar,#tabs-toolbar,#tabmail-tabs,#today-pane-panel,#agenda-container,#agenda,#mini-day-box,#mini-day-image,#mini-month-box,#today-minimonth,#nature-glass-two-month-calendar,.ng007-months-shell,.ng007-month,.ng007-week,.ng007-dow,#status-bar,#spacesToolbar) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #today-pane-panel > .sidebar-header {
+  background:rgba(4,12,14,.16) !important;
+  background-image:none !important;
+  backdrop-filter:none !important;
+  border-bottom-color:rgba(220,237,230,.18) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #agenda .agenda-date-header {
+  background:rgba(230,236,229,.18) !important;
+  background-image:none !important;
+  border-color:rgba(230,236,229,.34) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(#agenda-toolbar,.ng007-month-title) {
+  background:rgba(4,12,14,.16) !important;
+  background-image:none !important;
+  backdrop-filter:none !important;
+  border-bottom-color:rgba(220,237,230,.18) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #today-minimonth :is(.minimonth-day,.minimonth-row-header):not([selected="true"]):not([today="true"]):not(:hover) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+
+}
+@-moz-document url("about:3pane") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  --ng-unread:rgba(128, 161, 130,.16);
+  --ng-edge:#a0bda1;
+  --ng-gold:rgba(205,155,47,.16);
+  --bb-bg-panel:transparent !important;
+  --bb-bg-hover:rgba(210,231,226,.09) !important;
+  --bb-bg-selected:rgba(105,163,183,.23) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(body,#folderPane,#folderTree,#threadPane,#threadTree,#messagePane,#messageBrowser,#multiMessageBrowser,#webBrowser,#threadPane .tree-view-table,#threadPane .tree-view-table-body,#threadPane table,#threadPane tbody,#threadTree tr,#threadTree td) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(#folderPaneHeaderBar,#threadPaneHeaderBar,#threadPaneHeader,#quickFilterBar,#quick-filter-bar) {
+  background:rgba(4,12,14,.16) !important;
+  background-image:none !important;
+  backdrop-filter:none !important;
+  border-bottom-color:rgba(220,237,230,.18) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #folderTree li.children > ul {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout .card-container {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  box-shadow:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout[data-properties~="dummy"] .card-container {
+  background:rgba(230,236,229,.18) !important;
+  background-image:none !important;
+  border-color:rgba(230,236,229,.34) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout:not([data-properties~="dummy"])[data-properties~="unread"] .card-container {
+  background:linear-gradient(90deg,rgba(128, 161, 130,.18),rgba(128, 161, 130,.08)) !important;
+  box-shadow:inset 3px 0 #a0bda1 !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout:not([data-properties~="dummy"]):is([data-properties~="flagged"],[data-properties~="T_24label1"],:has(.tag-icon:not([hidden])[style*="label1-backcolor"])) .card-container {
+  background:linear-gradient(90deg,rgba(205,155,47,.18),rgba(205,155,47,.07)) !important;
+  box-shadow:inset 3px 0 #d4ac5c !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout:not([data-properties~="dummy"]):is([data-properties~="flagged"],[data-properties~="T_24label1"],:has(.tag-icon:not([hidden])[style*="label1-backcolor"]))[data-properties~="unread"] .card-container {
+  background:linear-gradient(90deg,rgba(205,155,47,.20),rgba(205,155,47,.08)) !important;
+  box-shadow:inset 3px 0 #a0bda1,inset 0 -1px rgba(212,172,92,.55) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout:not([data-properties~="dummy"]):hover .card-container {
+  outline:1px solid rgba(215,237,230,.28) !important;
+  outline-offset:-1px !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #threadTree tr.card-layout:not([data-properties~="dummy"]):is(.selected,[aria-selected="true"]) .card-container {
+  outline:2px solid #9bbfc8 !important;
+  outline-offset:-2px !important;
+  background-color:rgba(93,144,162,.22) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #folderTree li {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #folderTree li > .container:hover {
+  background:rgba(182,214,207,.1) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #folderTree li.selected > .container {
+  background:rgba(106,164,177,.25) !important;
+  
+}
+
+}
+@-moz-document url("about:message") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  --ng-unread:rgba(128, 161, 130,.16);
+  --ng-edge:#a0bda1;
+  --ng-gold:rgba(205,155,47,.16);
+  --bb-bg-panel:transparent !important;
+  --bb-bg-hover:rgba(210,231,226,.09) !important;
+  --bb-bg-selected:rgba(105,163,183,.23) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(body,#messagepanebox,#messagepane,#messageHeader,#messageHeaderView,#messageHeaderTop,#messageHeaderBottom,#expandedHeaderView,.message-header,.message-header-container,.message-header-view) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) #messageHeader {
+  background:rgba(4,12,14,.16) !important;
+  background-image:none !important;
+  backdrop-filter:none !important;
+  border-bottom-color:rgba(220,237,230,.18) !important;
+  
+}
+
+}
+@-moz-document url("chrome://messenger/content/multimessageview.xhtml") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  --ng-unread:rgba(128, 161, 130,.16);
+  --ng-edge:#a0bda1;
+  --ng-gold:rgba(205,155,47,.16);
+  --bb-bg-panel:transparent !important;
+  --bb-bg-hover:rgba(210,231,226,.09) !important;
+  --bb-bg-selected:rgba(105,163,183,.23) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) body {
+  background:transparent !important;
+   background-image:none !important;
+   background-blend-mode:normal !important;
+   backdrop-filter:none !important;
+  
+}
+
+}
+@-moz-document url("chrome://messenger/content/messenger.xhtml") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(#quick-filter-bar input,#threadPaneQuickFilterButton,#todaypane-new-event-button,#unifiedToolbar input) {
+  background-color:rgba(15,29,32,.32) !important;
+  border-color:rgba(220,237,230,.24) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) search-bar::part(input) {
+  background-color:rgba(15,29,32,.32) !important;
+  border-color:rgba(220,237,230,.24) !important;
+  
+}
+
+}
+@-moz-document url("about:3pane") {
+  :root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) :is(#quick-filter-bar input,#threadPaneQuickFilterButton,#todaypane-new-event-button,#unifiedToolbar input) {
+  background-color:rgba(15,29,32,.32) !important;
+  border-color:rgba(220,237,230,.24) !important;
+  
+}
+:root:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4) search-bar::part(input) {
+  background-color:rgba(15,29,32,.32) !important;
+  border-color:rgba(220,237,230,.24) !important;
+  
+}
+
+}

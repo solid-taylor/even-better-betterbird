@@ -1,0 +1,47 @@
+[
+  {
+    "namespace": "wallpaperChanger",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Start wallpaper rotation with a JSON configuration.",
+        "async": true,
+        "parameters": [{"name": "configJson", "type": "string"}],
+        "returns": {"type": "string"}
+      },
+      {
+        "name": "configure",
+        "type": "function",
+        "description": "Apply and persistently use a JSON configuration.",
+        "async": true,
+        "parameters": [{"name": "configJson", "type": "string"}],
+        "returns": {"type": "string"}
+      },
+      {
+        "name": "chooseFolder",
+        "type": "function",
+        "description": "Open the native folder picker and return a JSON path descriptor, or an empty string when cancelled.",
+        "async": true,
+        "parameters": [],
+        "returns": {"type": "string"}
+      },
+      {
+        "name": "next",
+        "type": "function",
+        "description": "Advance immediately to the next wallpaper and return JSON status.",
+        "async": true,
+        "parameters": [],
+        "returns": {"type": "string"}
+      },
+      {
+        "name": "getStatus",
+        "type": "function",
+        "description": "Return JSON runtime status.",
+        "async": true,
+        "parameters": [],
+        "returns": {"type": "string"}
+      }
+    ]
+  }
+]

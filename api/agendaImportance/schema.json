@@ -1,0 +1,14 @@
+[
+  {
+    "namespace": "agendaImportance",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Start classifying upcoming Today Pane events.",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

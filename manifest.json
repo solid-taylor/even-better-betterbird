@@ -1,0 +1,76 @@
+{
+  "manifest_version": 2,
+  "name": "Even Better BetterBird",
+  "description": "A complete Nature Glass interface, smarter sender avatars, readable message modes, enhanced calendars, and rotating wallpapers for Betterbird.",
+  "version": "1.0.1",
+  "author": "Szilard",
+  "homepage_url": "https://github.com/solid-taylor/even-better-betterbird",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "even-better-betterbird@solid-taylor.github.io",
+      "strict_min_version": "140.0"
+    }
+  },
+  "permissions": ["storage"],
+  "icons": {
+    "32": "icons/icon.svg",
+    "64": "icons/icon.svg"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "experiment_apis": {
+    "themeLoader": {
+      "schema": "api/themeLoader/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["themeLoader"]],
+        "script": "api/themeLoader/implementation.js"
+      }
+    },
+    "agendaImportance": {
+      "schema": "api/agendaImportance/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["agendaImportance"]],
+        "script": "api/agendaImportance/implementation.js"
+      }
+    },
+    "messageContrast": {
+      "schema": "api/messageContrast/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["messageContrast"]],
+        "script": "api/messageContrast/implementation.js"
+      }
+    },
+    "senderAvatars": {
+      "schema": "api/senderAvatars/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["senderAvatars"]],
+        "script": "api/senderAvatars/implementation.js"
+      }
+    },
+    "twoMonthCalendar": {
+      "schema": "api/twoMonthCalendar/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["twoMonthCalendar"]],
+        "script": "api/twoMonthCalendar/implementation.js"
+      }
+    },
+    "wallpaperChanger": {
+      "schema": "api/wallpaperChanger/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["wallpaperChanger"]],
+        "script": "api/wallpaperChanger/implementation.js"
+      }
+    }
+  }
+}

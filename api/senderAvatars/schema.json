@@ -1,0 +1,14 @@
+[
+  {
+    "namespace": "senderAvatars",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Add local-photo, cached-domain-icon, and sender-initial hooks to Betterbird message cards.",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

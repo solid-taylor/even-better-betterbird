@@ -1,0 +1,14 @@
+[
+  {
+    "namespace": "messageContrast",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Start adaptive message contrast repair.",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

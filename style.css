@@ -1,0 +1,133 @@
+/* Nature Glass calendar-source color and importance styling for Today Pane. */
+
+#agenda .agenda-listitem[data-nature-glass-calendar] {
+  --nature-glass-calendar-accent: color-mix(
+    in srgb,
+    var(--nature-glass-calendar-color) 72%,
+    white
+  );
+  border-radius: 6px !important;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--nature-glass-calendar-accent) 13%, transparent),
+    color-mix(in srgb, var(--nature-glass-calendar-accent) 5%, transparent) 76%,
+    transparent
+  ) !important;
+}
+
+#agenda .agenda-listitem[data-nature-glass-calendar].agenda-listitem-past {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--nature-glass-calendar-accent) 8%, transparent),
+    color-mix(in srgb, var(--nature-glass-calendar-accent) 3%, transparent) 72%,
+    transparent
+  ) !important;
+}
+
+#agenda .agenda-listitem[data-nature-glass-calendar]
+  .agenda-listitem-calendar {
+  background: var(--nature-glass-calendar-accent) !important;
+  box-shadow: 0 0 0 1px color-mix(
+    in srgb,
+    var(--nature-glass-calendar-accent) 38%,
+    transparent
+  ) !important;
+}
+
+#agenda .agenda-listitem[data-nature-glass-calendar].agenda-listitem-past
+  .agenda-listitem-calendar {
+  background: color-mix(
+    in srgb,
+    var(--nature-glass-calendar-accent) 55%,
+    #55787b
+  ) !important;
+  box-shadow: none !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past):is(
+  .nature-glass-importance-1,
+  .nature-glass-importance-2,
+  .nature-glass-importance-3
+) {
+  border-radius: 0 !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past):is(
+  .nature-glass-importance-1,
+  .nature-glass-importance-2,
+  .nature-glass-importance-3
+) .agenda-listitem-details {
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past):is(
+  .nature-glass-importance-1,
+  .nature-glass-importance-2,
+  .nature-glass-importance-3
+) .agenda-listitem-title {
+  font-weight: 400 !important;
+  text-shadow: none !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past)
+  .nature-glass-importance-marker {
+  color: #e7b342 !important;
+  font-weight: 700 !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past).nature-glass-importance-1[data-nature-glass-importance-sources~="priority"] {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(191, 145, 43, 0.045),
+      rgba(191, 145, 43, 0.015) 72%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 12%, transparent),
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 5%, transparent) 76%,
+      transparent
+    ) !important;
+  box-shadow: inset 1px 0 rgba(219, 168, 54, 0.28) !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past).nature-glass-importance-2 {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(191, 145, 43, 0.095),
+      rgba(191, 145, 43, 0.035) 78%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 11%, transparent),
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 4%, transparent) 76%,
+      transparent
+    ) !important;
+  box-shadow:
+    inset 0 1px rgba(219, 168, 54, 0.25),
+    inset 0 -1px rgba(219, 168, 54, 0.25) !important;
+}
+
+#agenda .agenda-listitem:not(.agenda-listitem-past).nature-glass-importance-3 {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(205, 155, 47, 0.16),
+      rgba(205, 155, 47, 0.06) 82%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 10%, transparent),
+      color-mix(in srgb, var(--nature-glass-calendar-accent) 4%, transparent) 76%,
+      transparent
+    ) !important;
+  box-shadow:
+    inset 0 1px rgba(232, 180, 63, 0.38),
+    inset 0 -1px rgba(232, 180, 63, 0.38) !important;
+}

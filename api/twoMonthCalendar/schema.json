@@ -1,0 +1,14 @@
+[
+  {
+    "namespace": "twoMonthCalendar",
+    "functions": [
+      {
+        "name": "start",
+        "type": "function",
+        "description": "Start rendering the two-month Today Pane calendar.",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]
