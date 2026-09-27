@@ -92,6 +92,7 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
       threadObserver: null,
       threadDocument: null,
       scheduled: false,
+      scheduledTimer: null,
       retryTimer: null,
       unload: null,
     };
@@ -132,12 +133,15 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
       state.threadDocument = document;
       const decorate = () => {
         state.scheduled = false;
-        this.decorateCards(document);
+        state.scheduledTimer = null;
+        if (this.started && this.windowStates.has(window)) {
+          this.decorateCards(document);
+        }
       };
       const schedule = () => {
         if (!state.scheduled) {
           state.scheduled = true;
-          window.setTimeout(decorate, 0);
+          state.scheduledTimer = window.setTimeout(decorate, 0);
         }
       };
       state.threadObserver = new document.defaultView.MutationObserver(schedule);
@@ -580,23 +584,40 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
     }
     state.documentObserver?.disconnect();
     state.threadObserver?.disconnect();
+    if (state.scheduledTimer) {
+      window.clearTimeout(state.scheduledTimer);
+      state.scheduledTimer = null;
+      state.scheduled = false;
+    }
     if (state.retryTimer) {
       window.clearInterval(state.retryTimer);
     }
-    for (const avatar of state.threadDocument?.querySelectorAll(
-      ".nature-glass-sender-avatar"
-    ) ?? []) {
-      avatar.remove();
-    }
+    this.removeAvatarNodes(window.document);
     window.removeEventListener("unload", state.unload);
     this.windowStates.delete(window);
   }
 
-  stop() {
-    if (!this.started) {
+  removeAvatarNodes(document, seen = new Set()) {
+    if (!document || seen.has(document)) {
       return;
     }
-    observerService.removeObserver(this.windowObserver, "domwindowopened");
+    seen.add(document);
+    for (const avatar of document.querySelectorAll(
+      ".nature-glass-sender-avatar"
+    )) {
+      avatar.remove();
+    }
+    for (const element of document.querySelectorAll("browser, iframe, frame")) {
+      try {
+        this.removeAvatarNodes(element.contentDocument, seen);
+      } catch (_) {}
+    }
+  }
+
+  stop() {
+    if (this.windowObserver) {
+      observerService.removeObserver(this.windowObserver, "domwindowopened");
+    }
     this.windowObserver = null;
     this.started = false;
     this.photoSpecCache.clear();
@@ -606,6 +627,9 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
     this.activeLookups = 0;
     for (const window of [...this.windowStates.keys()]) {
       this.detachWindow(window);
+    }
+    for (const window of windowMediator.getEnumerator("mail:3pane")) {
+      this.removeAvatarNodes(window.document);
     }
   }
 

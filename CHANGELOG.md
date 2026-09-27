@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 - 2026-09-27
+
+- Ensured sender-avatar decorations are removed immediately when the add-on is disabled.
+- Cancelled pending avatar decoration work during shutdown for clean enable/disable cycles.
+
 ## 1.0.1 - 2026-09-27
 
 - Isolated the bundled Experiment API modules so all unified features can start
