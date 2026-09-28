@@ -109,6 +109,13 @@ cached so Betterbird does not repeatedly request them.
 - Folders outside the profile use an absolute machine-specific path.
 - When present, `background.jpg` is always the first wallpaper.
 
+### BetterBird looks like this:
+<img width="1808" height="1006" alt="image" src="https://github.com/user-attachments/assets/7d2da4b8-9ff3-452c-a559-7a85978697fa" />
+
+### Starting from this look:
+<img width="1517" height="957" alt="image" src="https://github.com/user-attachments/assets/d87384c6-461b-4965-a243-e101b4279e7f" />
+
+
 ## Installation
 
 1. Download the latest `even-better-betterbird-*.xpi` from the GitHub Releases
