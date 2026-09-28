@@ -46,16 +46,20 @@ editing is required.
 The message list chooses the best available identity image in this order:
 
 1. the sender's individual Address Book photo;
-2. a cached icon for the sender's domain;
+2. a cached icon for the sender's domain or its public-suffix-aware base domain;
 3. a bold two-letter monogram, such as **EC** for Emiliano Cori.
 
 Contacts that exist in the Address Book but have no photo are still eligible
 for a domain icon. Contacts with an individual photo always keep that photo.
 
 Domain icons are requested from `geticon.dev` using the domain only—the full
-email address is never sent. Accepted images are cached in the active profile's
-`Photos` folder. Generated placeholder avatars are rejected, and failed lookups
-are temporarily cached so Betterbird does not repeatedly request them.
+email address is never sent. For a sender on a subdomain, the add-on also checks
+the registrable base domain, such as `apple.com` for
+`news@insideapple.apple.com`. If Geticon has only a generated placeholder, the
+add-on can make a credential-free HTTPS request for the base domain's standard
+site icon. Accepted images are cached in the active profile's `Photos` folder.
+Generated placeholder avatars are rejected, and failed lookups are temporarily
+cached so Betterbird does not repeatedly request them.
 
 ### Safer light and dark message reading
 
@@ -150,15 +154,20 @@ closed if desired.
 
 ## Privacy and network use
 
-Most features work entirely inside Betterbird. The only external request is the
+Most features work entirely inside Betterbird. External requests are limited to
 automatic sender-domain icon lookup:
 
 - service: `https://geticon.dev/`;
-- transmitted value: the sender's domain, never the complete email address;
+- transmitted value: the sender's domain or registrable base domain, never the
+  complete email address;
+- fallback: if Geticon has no real icon, a credential-free, no-referrer HTTPS
+  request may check `/favicon.ico` and `/apple-touch-icon.png` on that same base
+  domain; redirects to a different registrable domain are rejected;
 - storage: accepted icons and bounded negative-cache markers are kept locally in
   the current Betterbird profile;
 - limits: images are size-limited and signature-checked before use;
-- fallback: rejected or unavailable icons use the local two-letter monogram.
+- final fallback: rejected or unavailable icons use the local two-letter
+  monogram.
 
 ## Compatibility and known limits
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.4 - 2026-09-28
+
+- Made direct site-icon redirect validation use Betterbird's native URI parser,
+  ensuring it also works inside the privileged Experiment API context.
+
+## 1.0.3 - 2026-09-28
+
+- Added public-suffix-aware fallback from sender subdomains to their base domain,
+  so addresses such as `news@insideapple.apple.com` and
+  `no-reply@connect.etoro.com` can use the Apple and eToro icons.
+- Added a validated HTTPS site-icon fallback when Geticon returns only its
+  generated letter avatar, while continuing to reject that generated avatar.
+- Updated Geticon requests to its current documented `?url=` interface.
+
 ## 1.0.2 - 2026-09-27
 
 - Ensured sender-avatar decorations are removed immediately when the add-on is disabled.

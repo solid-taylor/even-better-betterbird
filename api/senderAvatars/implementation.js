@@ -364,14 +364,22 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
     return file;
   }
 
-  domainIconFor(domain) {
-    if (!domain) {
-      return "";
-    }
+  domainCandidates(domain) {
+    let baseDomain = "";
+    try {
+      baseDomain = Services.eTLD
+        .getBaseDomainFromHost(domain)
+        .toLocaleLowerCase();
+    } catch (_) {}
+    return baseDomain && baseDomain !== domain
+      ? [domain, baseDomain]
+      : [domain];
+  }
+
+  cachedDomainIconFor(domain) {
     if (this.domainIconSpecCache.has(domain)) {
       return this.domainIconSpecCache.get(domain);
     }
-
     for (const extension of ICON_EXTENSIONS) {
       const file = this.cacheFile(domain, extension);
       if (file.exists() && file.isFile() && file.fileSize > 0) {
@@ -380,20 +388,39 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
         return spec;
       }
     }
+    return null;
+  }
 
-    const negativeMarker = this.cacheFile(domain, "none");
-    if (negativeMarker.exists()) {
-      if (Date.now() - negativeMarker.lastModifiedTime < NEGATIVE_CACHE_TTL_MS) {
-        this.domainIconSpecCache.set(domain, "");
-        return "";
-      }
-      try {
-        negativeMarker.remove(false);
-      } catch (_) {}
+  hasFreshNegativeMarker(domain) {
+    const marker = this.cacheFile(domain, "none");
+    if (!marker.exists()) {
+      return false;
     }
+    if (Date.now() - marker.lastModifiedTime < NEGATIVE_CACHE_TTL_MS) {
+      return true;
+    }
+    try {
+      marker.remove(false);
+    } catch (_) {}
+    return false;
+  }
 
-    this.domainIconSpecCache.set(domain, "");
-    this.queueDomainIconLookup(domain);
+  domainIconFor(domain) {
+    if (!domain) {
+      return "";
+    }
+    let unresolved = false;
+    for (const candidate of this.domainCandidates(domain)) {
+      const cached = this.cachedDomainIconFor(candidate);
+      if (cached) {
+        this.domainIconSpecCache.set(domain, cached);
+        return cached;
+      }
+      unresolved ||= cached === null;
+    }
+    if (unresolved) {
+      this.queueDomainIconLookup(domain);
+    }
     return "";
   }
 
@@ -402,7 +429,7 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
       return;
     }
 
-    const promise = this.lookupAndCacheDomainIcon(domain)
+    const promise = this.lookupDomainIconCandidates(domain)
       .catch(error => {
         Services.console.logStringMessage(
           `[Nature Glass Sender Avatars] Domain lookup failed for ${domain}: ` +
@@ -415,6 +442,37 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
         this.redecorateAllWindows();
       });
     this.domainIconPromises.set(domain, promise);
+  }
+
+  async lookupDomainIconCandidates(domain) {
+    const candidates = this.domainCandidates(domain);
+    for (const candidate of candidates) {
+      const cached = this.cachedDomainIconFor(candidate);
+      if (cached) {
+        this.domainIconSpecCache.set(domain, cached);
+        return cached;
+      }
+      if (cached === null && !this.hasFreshNegativeMarker(candidate)) {
+        const spec = await this.lookupAndCacheDomainIcon(candidate);
+        if (spec) {
+          this.domainIconSpecCache.set(domain, spec);
+          return spec;
+        }
+      }
+    }
+
+    const baseDomain = candidates.at(-1);
+    const directSpec = await this.lookupDirectSiteIcon(baseDomain);
+    if (directSpec) {
+      this.domainIconSpecCache.set(domain, directSpec);
+      return directSpec;
+    }
+
+    for (const candidate of candidates) {
+      this.domainIconSpecCache.set(candidate, "");
+    }
+    this.domainIconSpecCache.set(domain, "");
+    return "";
   }
 
   async acquireLookupSlot() {
@@ -436,7 +494,7 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
     try {
       const encodedDomain = encodeURIComponent(domain);
       const metadataUrl =
-        `https://geticon.dev/api/icon?domain=${encodedDomain}&format=json`;
+        `https://geticon.dev/?url=${encodedDomain}&format=json`;
       const metadataResponse = await this.systemFetch(metadataUrl);
       if (!metadataResponse.ok) {
         return "";
@@ -456,7 +514,7 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
       }
 
       const imageUrl =
-        `https://geticon.dev/api/icon?domain=${encodedDomain}`;
+        `https://geticon.dev/?url=${encodedDomain}`;
       const imageResponse = await this.systemFetch(imageUrl);
       if (!imageResponse.ok || !imageResponse.url.startsWith("https://")) {
         return "";
@@ -498,6 +556,74 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
     } finally {
       this.releaseLookupSlot();
     }
+  }
+
+  async lookupDirectSiteIcon(baseDomain) {
+    const endpoints = ["/favicon.ico", "/apple-touch-icon.png"];
+    for (const endpoint of endpoints) {
+      try {
+        const response = await this.systemFetch(
+          `https://${baseDomain}${endpoint}`
+        );
+        if (!response.ok || !response.url.startsWith("https://")) {
+          continue;
+        }
+
+        let finalBaseDomain = "";
+        try {
+          const finalHost = Services.io
+            .newURI(response.url)
+            .host
+            .toLocaleLowerCase();
+          finalBaseDomain = Services.eTLD
+            .getBaseDomainFromHost(finalHost)
+            .toLocaleLowerCase();
+        } catch (_) {}
+        if (finalBaseDomain !== baseDomain) {
+          continue;
+        }
+
+        const declaredLength = Number(
+          response.headers.get("content-length") || 0
+        );
+        if (declaredLength > MAX_ICON_BYTES) {
+          continue;
+        }
+        const contentType = (response.headers.get("content-type") || "")
+          .split(";", 1)[0]
+          .trim()
+          .toLocaleLowerCase();
+        const extension = CONTENT_TYPE_EXTENSIONS.get(contentType);
+        if (!extension) {
+          continue;
+        }
+
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        if (
+          bytes.byteLength === 0 ||
+          bytes.byteLength > MAX_ICON_BYTES ||
+          !this.hasValidImageSignature(bytes, extension)
+        ) {
+          continue;
+        }
+
+        const file = this.cacheFile(baseDomain, extension);
+        await IOUtils.write(file.path, bytes);
+        const spec = Services.io.newFileURI(file).spec;
+        this.domainIconSpecCache.set(baseDomain, spec);
+        Services.console.logStringMessage(
+          `[Nature Glass Sender Avatars] Cached direct site icon for ` +
+          `${baseDomain} as ${file.leafName}`
+        );
+        return spec;
+      } catch (error) {
+        Services.console.logStringMessage(
+          `[Nature Glass Sender Avatars] Direct site icon lookup failed for ` +
+          `${baseDomain}${endpoint}: ${error?.message || error}`
+        );
+      }
+    }
+    return "";
   }
 
   systemFetch(url) {
