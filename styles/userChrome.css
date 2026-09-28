@@ -2102,7 +2102,7 @@ tr.card-layout span.subject {
 
         background-image:
             linear-gradient(rgba(7, 18, 20, .18), rgba(7, 18, 20, .18)),
-            url("background.jpg")
+            var(--even-better-wallpaper-image, url("background.jpg"))
             !important;
 
         background-position:
@@ -2420,7 +2420,7 @@ notification {
   #messengerWindow {
     --reader-border: rgba(224, 239, 239, .24);
     --reader-text: #f4f7f8;
-    background-image: linear-gradient(rgba(7, 18, 20, .22), rgba(7, 18, 20, .22)), url("background.jpg") !important;
+    background-image: linear-gradient(rgba(7, 18, 20, .22), rgba(7, 18, 20, .22)), var(--even-better-wallpaper-image, url("background.jpg")) !important;
     background-position: center !important;
     background-size: cover !important;
     background-attachment: fixed !important;
@@ -3094,7 +3094,7 @@ input {
 
     background-image:
         linear-gradient(rgba(7, 18, 20, .18), rgba(7, 18, 20, .18)),
-        url("background.jpg")
+        var(--even-better-wallpaper-image, url("background.jpg"))
         !important;
 
     background-position:
@@ -3214,7 +3214,7 @@ treechildren::-moz-tree-cell-text(selected) {
 
         background-image:
             linear-gradient(rgba(7, 18, 20, .18), rgba(7, 18, 20, .18)),
-            url("background.jpg")
+            var(--even-better-wallpaper-image, url("background.jpg"))
             !important;
 
         background-position:
@@ -3271,7 +3271,7 @@ treechildren::-moz-tree-cell-text(selected) {
 
         background-image:
             linear-gradient(rgba(7, 18, 20, .18), rgba(7, 18, 20, .18)),
-            url("background.jpg")
+            var(--even-better-wallpaper-image, url("background.jpg"))
             !important;
 
         background-position:
@@ -3308,7 +3308,7 @@ treechildren::-moz-tree-cell-text(selected) {
             rgba(247,247,247,.88),
             rgba(247,247,247,.88)
         ),
-        url("background.jpg")
+        var(--even-better-wallpaper-image, url("background.jpg"))
         !important;
 
     background-size:
@@ -3401,7 +3401,7 @@ treechildren::-moz-tree-cell-text(selected) {
 
         background-image:
             linear-gradient(rgba(7, 18, 20, .18), rgba(7, 18, 20, .18)),
-            url("background.jpg")
+            var(--even-better-wallpaper-image, url("background.jpg"))
             !important;
 
         background-position:
@@ -3510,7 +3510,7 @@ treechildren::-moz-tree-cell-text(selected) {
 
     background-image:
         linear-gradient(rgba(7, 18, 20, .20), rgba(7, 18, 20, .20)),
-        url("background.jpg")
+        var(--even-better-wallpaper-image, url("background.jpg"))
         !important;
 
     background-position:
@@ -3555,7 +3555,7 @@ treechildren::-moz-tree-cell-text(selected) {
 
         background-image:
             linear-gradient(rgba(7, 18, 21, .72), rgba(7, 18, 21, .72)),
-            url("background.jpg")
+            var(--even-better-wallpaper-image, url("background.jpg"))
             !important;
 
         background-position:
@@ -3647,7 +3647,7 @@ treechildren::-moz-tree-cell-text(selected) {
    ========================================================== */
 
 @-moz-document url("chrome://messenger/content/messengercompose/messengercompose.xhtml") {
-  #msgcomposeWindow { --compose-glass:rgba(15,29,32,.58);--compose-border:rgba(224,239,239,.24);--compose-text:#f4f7f8;background-image:linear-gradient(rgba(7,18,20,.22),rgba(7,18,20,.22)),url("background.jpg") !important;background-position:center !important;background-size:cover !important;background-attachment:fixed !important;color:var(--compose-text) !important; }
+  #msgcomposeWindow { --compose-glass:rgba(15,29,32,.58);--compose-border:rgba(224,239,239,.24);--compose-text:#f4f7f8;background-image:linear-gradient(rgba(7,18,20,.22),rgba(7,18,20,.22)),var(--even-better-wallpaper-image, url("background.jpg")) !important;background-position:center !important;background-size:cover !important;background-attachment:fixed !important;color:var(--compose-text) !important; }
   #msgcomposeWindow:has(#disableDarkReaderCompose:checked) #messageEditor {
     color-scheme: light !important;
   }
@@ -4505,7 +4505,7 @@ treechildren::-moz-tree-cell-text(selected) {
         background-color: #071215 !important;
         background-image:
           linear-gradient(rgba(4,12,14,.62), rgba(4,12,14,.62)),
-          url("background.jpg") !important;
+          var(--even-better-wallpaper-image, url("background.jpg")) !important;
         background-position: center !important;
         background-size: cover !important;
         background-attachment: fixed !important;

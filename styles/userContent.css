@@ -289,7 +289,7 @@ body:is([bgcolor="#fff" i], [bgcolor="#ffffff" i], [bgcolor="white" i]) {
     --ab-contact-photo-size: 96px;
     background-image:
       linear-gradient(rgba(7, 18, 20, .22), rgba(7, 18, 20, .22)),
-      url("background.jpg") !important;
+      var(--even-better-wallpaper-image, url("background.jpg")) !important;
     background-position: center !important;
     background-size: cover !important;
     background-attachment: fixed !important;

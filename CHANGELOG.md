@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 - 2026-09-28
+
+- Propagated the active wallpaper to every themed top-level window and dialog,
+  including standalone message readers, composers, Address Book, and Calendar
+  dialogs, instead of replacing the bundled wallpaper only in the main window.
+
 ## 1.0.4 - 2026-09-28
 
 - Made direct site-icon redirect validation use Betterbird's native URI parser,

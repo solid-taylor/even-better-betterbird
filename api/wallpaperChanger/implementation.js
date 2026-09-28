@@ -175,10 +175,8 @@ var wallpaperChanger = class extends ExtensionCommon.ExtensionAPI {
     if (!file.uri && !file.exists()) throw new Error("Selected wallpaper is no longer available.");
     const fileURI = (file.uri || Services.io.newFileURI(file).spec)
       .replace(/["\\\n\r]/g, character => encodeURIComponent(character));
-    const css = `@-moz-document url("chrome://messenger/content/messenger.xhtml") {
-      html#messengerWindow:not(#nature-glass-cascade-guard-1):not(#nature-glass-cascade-guard-2):not(#nature-glass-cascade-guard-3):not(#nature-glass-cascade-guard-4)::before {
-        background-image: linear-gradient(rgba(19, 29, 26, 0.72), rgba(19, 29, 26, 0.72)), url("${fileURI}") !important;
-      }
+    const css = `:root {
+      --even-better-wallpaper-image: url("${fileURI}") !important;
     }`;
     const uri = Services.io.newURI("data:text/css;charset=utf-8," + encodeURIComponent(css));
     this.unregisterSheet();

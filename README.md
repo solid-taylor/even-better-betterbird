@@ -148,6 +148,11 @@ Preferences/Options page.
 - **Use included default** returns to the built-in Nature Glass wallpaper.
 - **Save settings** applies the chosen folder and interval.
 
+The selected wallpaper is shared by every themed Betterbird surface, including
+the main window, standalone message readers, composers, Address Book, Calendar,
+Tasks, and related dialogs. Message and compose canvases still respect their
+light/dark content mode so readability is preserved.
+
 ## Removing the add-on
 
 Disable or remove **Even Better BetterBird** from Add-ons and Themes, then
