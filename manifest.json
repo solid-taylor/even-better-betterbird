@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Even Better BetterBird",
   "description": "A complete Nature Glass interface, smarter sender avatars, readable message modes, enhanced calendars, and rotating wallpapers for Betterbird.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Szilard",
   "homepage_url": "https://github.com/solid-taylor/even-better-betterbird",
   "browser_specific_settings": {

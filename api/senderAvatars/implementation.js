@@ -377,8 +377,9 @@ var senderAvatars = class extends ExtensionCommon.ExtensionAPI {
   }
 
   cachedDomainIconFor(domain) {
-    if (this.domainIconSpecCache.has(domain)) {
-      return this.domainIconSpecCache.get(domain);
+    const remembered = this.domainIconSpecCache.get(domain);
+    if (remembered) {
+      return remembered;
     }
     for (const extension of ICON_EXTENSIONS) {
       const file = this.cacheFile(domain, extension);

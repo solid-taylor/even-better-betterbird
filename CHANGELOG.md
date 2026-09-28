@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 - 2026-09-28
+
+- Recheck the on-disk sender-icon cache after an earlier lookup miss, so a
+  newly available base-domain icon can replace a stale in-memory monogram
+  immediately instead of waiting for another restart.
+
 ## 1.0.5 - 2026-09-28
 
 - Propagated the active wallpaper to every themed top-level window and dialog,
