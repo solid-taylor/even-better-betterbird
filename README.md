@@ -47,7 +47,7 @@ The message list chooses the best available identity image in this order:
 
 1. the sender's individual Address Book photo;
 2. a cached icon for the sender's domain or its public-suffix-aware base domain;
-3. a bold two-letter monogram, such as **EC** for Emiliano Cori.
+3. a bold two-letter monogram derived from the sender's display name.
 
 Contacts that exist in the Address Book but have no photo are still eligible
 for a domain icon. Contacts with an individual photo always keep that photo.
