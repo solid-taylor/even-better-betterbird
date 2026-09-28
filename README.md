@@ -5,7 +5,7 @@
 visual experience with practical improvements for mail reading, sender
 identification, calendars, the Today Pane, composing, and wallpaper rotation.
 
-Install one `.xpi` file and restart Betterbird. No manual `userChrome.css`
+Install one [`.xpi` file](https://github.com/solid-taylor/even-better-betterbird/releases) and restart Betterbird. No manual `userChrome.css`
 editing is required.
 
 > Tested with Betterbird 140.13.0 on Windows. Betterbird 140 or newer is
