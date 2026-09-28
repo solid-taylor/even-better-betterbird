@@ -118,7 +118,7 @@ cached so Betterbird does not repeatedly request them.
 
 ## Installation
 
-1. Download the latest `even-better-betterbird-*.xpi` from the GitHub Releases
+1. Download the latest `even-better-betterbird-*.xpi` from the [GitHub Releases](https://github.com/solid-taylor/even-better-betterbird/releases)
    page.
 2. In Betterbird, open **Add-ons and Themes**.
 3. Open the gear menu and choose **Install Add-on From File…**.
